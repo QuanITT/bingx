@@ -1,7 +1,8 @@
-// Controller.test.ts
 
 import Controller from "../Base/controller";
+import NewsController from "../Component-news/NewsController";
 import ListView from "../Component/listView";
+import NewsView from "../Component/newView";
 import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
@@ -14,7 +15,7 @@ describe("Controller", () => {
     const news = new News("Breaking News", "news.jpg", 100, 10, channel);
 
     // Act
-    const result = controller.Render(news);
+    const result = controller.render(news);
 
     // Assert
     const expectedHtml = `<div><h1>${news.title}</h1><img src="${news.imgUrl}" alt="Image"><p>Like: ${news.like}, Unlike: ${news.unlike}</p><p>Channel: ${news.channel.name}</p></div>`;
@@ -33,7 +34,7 @@ describe("ListView", () => {
     const listView = new ListView(controller, listNews);
 
     // Act
-    const result = listView.Render();
+    const result = listView.render();
 
     // Assert
     const news1 = listNews.getNewsList()[0];
@@ -56,9 +57,26 @@ describe("ListView", () => {
 
     const listView = new ListView(controller, listNews);
 
-    const result = listView.Render();
+    const result = listView.render();
 
     const expectedHtml = `<div><h1>${news1.title}</h1><img src="${news1.imgUrl}" alt="Image"><p>Like: ${news1.like}, Unlike: ${news1.unlike}</p><p>Channel: ${news1.channel.name}</p></div><div><h1>${news2.title}</h1><img src="${news2.imgUrl}" alt="Image"><p>Like: ${news2.like}, Unlike: ${news2.unlike}</p><p>Channel: ${news2.channel.name}</p></div>`;
     expect(result).toBe(expectedHtml);
   });
 });
+
+// describe("test", () => {
+//   it("test component to view", () => {
+//     // Tạo một DOMParser
+//     const parser = new DOMParser();
+
+//     // Tạo một chuỗi HTML giả định
+//     const htmlString = '<div><p>Hello, <span>world</span>!</p></div>';
+  
+//     // Sử dụng DOMParser để phân tích chuỗi HTML thành DOMString
+//     const doc = parser.parseFromString(htmlString, 'text/html');
+  
+//     // Kiểm tra xem doc có phải là một DOMString không
+//     expect(doc.constructor.name).toBe('DOMString');
+//   });
+    
+//   });

@@ -3,7 +3,6 @@ import { BaseModel } from "../Base/baseModel";
 import ListNews from "../Models/ListNews";
 import NewsView from "./newView";
 
-
 class ListView {
   private newsList: ListNews;
   private newsView: NewsView;
@@ -14,14 +13,12 @@ class ListView {
     this.newsView = new NewsView(controller);
   }
 
-  Render(): string {
-    let newsHtml = '';
-
-    this.newsList.getNewsList().forEach(news => {
-      const newsRendered = this.newsView.Render(news);
+  render(): string {
+    let newsHtml = "";
+    this.newsList.getNewsList().forEach((news) => {
+      const newsRendered = this.newsView.render(news);
       newsHtml += newsRendered;
     });
-
     return newsHtml;
   }
 }

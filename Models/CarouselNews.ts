@@ -1,4 +1,4 @@
-import { News } from "./News";
+import News from "./News";
 
 
 export class CarouselNews {
