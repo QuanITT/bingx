@@ -1,9 +1,10 @@
 import Component from "../Base/component";
 import Controller from "../Base/component";
+import AppController from "../Controller/controller";
 import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
-import ListView from "../View/listView";
+import ListView from "../View/listNewsViews";
 
 describe("Controller", () => {
   it("should render news correctly", () => {
@@ -42,40 +43,27 @@ describe("ListView", () => {
     expect(result).toBe(expectedHtml);
   });
 });
-describe("ListView", () => {
-  it("should render list of news with channel correctly", () => {
-    // Arrange
-    const controller = new Controller<News>();
-    const listNews = new ListNews();
-    const channel: Channel = { name: "News Channel", icon: "Icon1" };
 
-    const news1 = new News("News 1", "news1.jpg", 100, 10, channel);
-    const news2 = new News("News 2", "news2.jpg", 200, 20, channel);
-    listNews.addNews(news1);
-    listNews.addNews(news2);
+//create test root element
+describe("Root to news", () => {
+  it("Should root view app controller component", () => {
+    const app = new AppController();
 
-    const listView = new ListView(controller, listNews);
+  const channel: Channel = { name: "News Channel", icon: "icon1" };
+  app.newsList.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
+  app.newsList.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
+  app.newsList.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
 
-    const result = listView.Render(); //render
+  app.ListNewsView = new ListView(app.component, app.newsList);
 
-    const expectedHtml = `<div><h1>${news1.title}</h1><img src="${news1.imgUrl}" alt="Image"><p>Like: ${news1.like}, Unlike: ${news1.unlike}</p><p>Channel: ${news1.channel.name}</p></div><div><h1>${news2.title}</h1><img src="${news2.imgUrl}" alt="Image"><p>Like: ${news2.like}, Unlike: ${news2.unlike}</p><p>Channel: ${news2.channel.name}</p></div>`;
-    expect(result).toBe(expectedHtml);
+  const result = app.ListNewsView.Render();
+
+  const news1 = app.newsList.getNewsList()[0];
+  const news2 = app.newsList.getNewsList()[1];
+  const news3 = app.newsList.getNewsList()[2];
+
+  const expectedHtml = `<div><h1>${news1.title}</h1><img src="${news1.imgUrl}" alt="Image"><p>Like: ${news1.like}, Unlike: ${news1.unlike}</p><p>Channel: ${news1.channel.name}</p></div><div><h1>${news2.title}</h1><img src="${news2.imgUrl}" alt="Image"><p>Like: ${news2.like}, Unlike: ${news2.unlike}</p><p>Channel: ${news2.channel.name}</p></div><div><h1>${news3.title}</h1><img src="${news3.imgUrl}" alt="Image"><p>Like: ${news3.like}, Unlike: ${news3.unlike}</p><p>Channel: ${news3.channel.name}</p></div>`;
+  expect(result).toBe(expectedHtml);
   });
+  
 });
-
-// describe("test", () => {
-//   it("test component to view", () => {
-//     // Tạo một DOMParser
-//     const parser = new DOMParser();
-
-//     // Tạo một chuỗi HTML giả định
-//     const htmlString = '<div><p>Hello, <span>world</span>!</p></div>';
-  
-//     // Sử dụng DOMParser để phân tích chuỗi HTML thành DOMString
-//     const doc = parser.parseFromString(htmlString, 'text/html');
-  
-//     // Kiểm tra xem doc có phải là một DOMString không
-//     expect(doc.constructor.name).toBe('DOMString');
-//   });
-    
-//   });

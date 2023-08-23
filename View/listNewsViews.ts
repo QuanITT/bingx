@@ -4,7 +4,7 @@ import ListNews from "../Models/ListNews";
 import NewsView from "./newView";
 
 
-class ListView {
+class ListNewViews {
   private newsList: ListNews;
   private newsView: NewsView;
 
@@ -26,4 +26,4 @@ class ListView {
   }
 }
 
-export default ListView;
+export default ListNewViews;
