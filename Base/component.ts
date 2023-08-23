@@ -1,3 +1,4 @@
+import { Channel } from "../Models/Channel";
 import { BaseModel } from "./baseModel";
   class Component<T extends BaseModel> {
     Render(model: T): string {

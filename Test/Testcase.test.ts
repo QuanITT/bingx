@@ -1,9 +1,9 @@
-
+import Component from "../Base/component";
 import Controller from "../Base/component";
-import ListView from "../Component/listView";
 import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
+import ListView from "../View/listView";
 
 describe("Controller", () => {
   it("should render news correctly", () => {
@@ -23,13 +23,14 @@ describe("Controller", () => {
 describe("ListView", () => {
   it("should render list of news correctly", () => {
     // Arrange
-    const controller = new Controller<News>();
-    const channel: Channel = { name: "News Channel", icon: "icon1" };
+    const component = new Component<News>();
     const listNews = new ListNews();
+
+    const channel: Channel = { name: "News Channel", icon: "icon1" };
     listNews.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
     listNews.addNews(new News("News 2", "news2.jpg", 200, 20, channel));
 
-    const listView = new ListView(controller, listNews);
+    const listView = new ListView(component, listNews);
 
     // Act
     const result = listView.Render();
