@@ -12,7 +12,6 @@ class ListView {
     this.newsList = newsList;
     this.newsView = new NewsView(controller);
   }
-
   render(): string {
     let newsHtml = "";
     this.newsList.getNewsList().forEach((news) => {

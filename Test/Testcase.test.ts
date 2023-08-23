@@ -1,8 +1,6 @@
 
 import Controller from "../Base/controller";
-import NewsController from "../Component-news/NewsController";
 import ListView from "../Component/listView";
-import NewsView from "../Component/newView";
 import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";

@@ -1,7 +1,3 @@
-
-
-// import { Channel } from "./Channel";
-
 import { BaseModel } from "../Base/baseModel";
 import { Channel } from "./Channel";
 
@@ -12,7 +8,13 @@ class News implements BaseModel {
   unlike: number;
   channel: Channel;
 
-  constructor(title: string, imgUrl: string, like: number, unlike: number,channel: Channel) {
+  constructor(
+    title: string,
+    imgUrl: string,
+    like: number,
+    unlike: number,
+    channel: Channel
+  ) {
     this.title = title;
     this.imgUrl = imgUrl;
     this.like = like;
@@ -22,5 +24,3 @@ class News implements BaseModel {
 }
 
 export default News;
-
-
