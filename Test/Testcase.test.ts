@@ -56,7 +56,7 @@ describe("ListView", () => {
 
     const listView = new ListView(controller, listNews);
 
-    const result = listView.Render();
+    const result = listView.Render(); //render
 
     const expectedHtml = `<div><h1>${news1.title}</h1><img src="${news1.imgUrl}" alt="Image"><p>Like: ${news1.like}, Unlike: ${news1.unlike}</p><p>Channel: ${news1.channel.name}</p></div><div><h1>${news2.title}</h1><img src="${news2.imgUrl}" alt="Image"><p>Like: ${news2.like}, Unlike: ${news2.unlike}</p><p>Channel: ${news2.channel.name}</p></div>`;
     expect(result).toBe(expectedHtml);
