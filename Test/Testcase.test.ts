@@ -1,5 +1,5 @@
 
-import Controller from "../Base/controller";
+import Controller from "../Base/component";
 import ListView from "../Component/listView";
 import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
@@ -13,7 +13,7 @@ describe("Controller", () => {
     const news = new News("Breaking News", "news.jpg", 100, 10, channel);
 
     // Act
-    const result = controller.render(news);
+    const result = controller.Render(news);
 
     // Assert
     const expectedHtml = `<div><h1>${news.title}</h1><img src="${news.imgUrl}" alt="Image"><p>Like: ${news.like}, Unlike: ${news.unlike}</p><p>Channel: ${news.channel.name}</p></div>`;
@@ -32,7 +32,7 @@ describe("ListView", () => {
     const listView = new ListView(controller, listNews);
 
     // Act
-    const result = listView.render();
+    const result = listView.Render();
 
     // Assert
     const news1 = listNews.getNewsList()[0];
@@ -55,7 +55,7 @@ describe("ListView", () => {
 
     const listView = new ListView(controller, listNews);
 
-    const result = listView.render();
+    const result = listView.Render();
 
     const expectedHtml = `<div><h1>${news1.title}</h1><img src="${news1.imgUrl}" alt="Image"><p>Like: ${news1.like}, Unlike: ${news1.unlike}</p><p>Channel: ${news1.channel.name}</p></div><div><h1>${news2.title}</h1><img src="${news2.imgUrl}" alt="Image"><p>Like: ${news2.like}, Unlike: ${news2.unlike}</p><p>Channel: ${news2.channel.name}</p></div>`;
     expect(result).toBe(expectedHtml);

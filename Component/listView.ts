@@ -1,23 +1,27 @@
-import Controller from "../Base/controller";
 import { BaseModel } from "../Base/baseModel";
+import Component from "../Base/component";
 import ListNews from "../Models/ListNews";
 import NewsView from "./newView";
+
 
 class ListView {
   private newsList: ListNews;
   private newsView: NewsView;
 
-  constructor(private controller: Controller<BaseModel>, newsList: ListNews) {
-    this.controller = controller;
+  constructor(private component: Component<BaseModel>, newsList: ListNews) {
+    this.component = component;
     this.newsList = newsList;
-    this.newsView = new NewsView(controller);
+    this.newsView = new NewsView(component);
   }
-  render(): string {
-    let newsHtml = "";
-    this.newsList.getNewsList().forEach((news) => {
-      const newsRendered = this.newsView.render(news);
+
+  Render(): string {
+    let newsHtml = '';
+
+    this.newsList.getNewsList().forEach(news => {
+      const newsRendered = this.newsView.Render(news);
       newsHtml += newsRendered;
     });
+
     return newsHtml;
   }
 }

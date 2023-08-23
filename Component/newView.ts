@@ -1,13 +1,14 @@
-import Controller from "../Base/controller";
 import { BaseModel } from "../Base/baseModel";
+import Component from "../Base/component";
+
 
 class NewsView {
-  constructor(private controller: Controller<BaseModel>) {
-    this.controller = controller;
+  constructor(private component: Component<BaseModel>) {
+    this.component = component;
   }
 
-  render(news: BaseModel): string {
-    return this.controller.render(news);
+  Render(news: BaseModel): string {
+    return this.component.Render(news);
   }
 }
 
