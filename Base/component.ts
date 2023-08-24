@@ -1,8 +1,5 @@
-import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
-import NewsView from "../View/newView";
-import { BaseModel } from "./baseModel";
   class Component {
     public newsList: ListNews;
     constructor( newsList: ListNews){
