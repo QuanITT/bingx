@@ -1,5 +1,5 @@
 import { BaseModel } from "../Base/baseModel";
-import Component from "../Base/component";
+import Component from "./component";
 import News from "../Models/News";
 
 

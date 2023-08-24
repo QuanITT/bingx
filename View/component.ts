@@ -1,6 +1,7 @@
+import { BaseModel } from '../Base/baseModel';
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
-  class Component<BaseModel> {
+  class Component< T extends BaseModel> {
     public newsList: News[];
     constructor(){
       this.newsList = [];
