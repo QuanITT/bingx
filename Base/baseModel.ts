@@ -1,5 +1,4 @@
 import { Channel } from "../Models/Channel";
-
 export class BaseModel {
     title: string;
     imgUrl?: string;
