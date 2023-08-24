@@ -1,20 +1,19 @@
 import Component from "../Base/component";
-import Controller from "../Base/component";
 import AppController from "../Controller/controller";
 import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
-import ListView from "../View/listNewsViews";
 
 describe("Controller", () => {
   it("should render news correctly", () => {
     // Arrange
-    const controller = new Controller<News>();
+    const listNews = new ListNews();
     const channel: Channel = { name: "News Channel", icon: "icon1" };
     const news = new News("Breaking News", "news.jpg", 100, 10, channel);
-
+    listNews.addNews(news);
+    const component = new Component(listNews);
     // Act
-    const result = controller.Render(news);
+    const result = component.RenderHTML(news);
 
     // Assert
     const expectedHtml = `<div><h1>${news.title}</h1><img src="${news.imgUrl}" alt="Image"><p>Like: ${news.like}, Unlike: ${news.unlike}</p><p>Channel: ${news.channel.name}</p></div>`;
@@ -24,17 +23,17 @@ describe("Controller", () => {
 describe("ListView", () => {
   it("should render list of news correctly", () => {
     // Arrange
-    const component = new Component<News>();
     const listNews = new ListNews();
 
     const channel: Channel = { name: "News Channel", icon: "icon1" };
     listNews.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
     listNews.addNews(new News("News 2", "news2.jpg", 200, 20, channel));
 
-    const listView = new ListView(component, listNews);
+    const component = new Component(listNews);
+
 
     // Act
-    const result = listView.Render();
+    const result = component.RenderListNews();
 
     // Assert
     const news1 = listNews.getNewsList()[0];
@@ -54,9 +53,9 @@ describe("Root to news", () => {
   app.newsList.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
   app.newsList.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
 
-  app.ListNewsView = new ListView(app.component, app.newsList);
+  app.component = new Component( app.newsList);
 
-  const result = app.ListNewsView.Render();
+  const result = app.component.RenderListNews();
 
   const news1 = app.newsList.getNewsList()[0];
   const news2 = app.newsList.getNewsList()[1];

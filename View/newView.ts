@@ -1,14 +1,15 @@
 import { BaseModel } from "../Base/baseModel";
 import Component from "../Base/component";
+import News from "../Models/News";
 
 
 class NewsView {
-  constructor(private component: Component<BaseModel>) {
+  constructor(private component: Component) {
     this.component = component;
   }
 
-  Render(news: BaseModel): string {
-    return this.component.Render(news);
+  HtmlString(news:News) {
+    this.component.RenderHTML(news);
   }
 }
 
