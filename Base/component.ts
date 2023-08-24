@@ -1,9 +1,9 @@
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
-  class Component {
-    public newsList: ListNews;
-    constructor( newsList: ListNews){
-      this.newsList = newsList;
+  class Component<BaseModel> {
+    public newsList: News[];
+    constructor(){
+      this.newsList = [];
     }
 
     RenderHTML(model: News): string {
@@ -12,14 +12,23 @@ import News from "../Models/News";
     }
     RenderListNews(): string {
       let newsHtml = '';
-  
-      this.newsList.getNewsList().forEach(news => {
+      this.newsList.forEach(news => {
         const newsRendered = this.RenderHTML(news);
         newsHtml += newsRendered;
       });
   
       return newsHtml;
     }
+
+    addNews(news: News): void {
+      this.newsList.push(news);
+    }
+  
+    getNewsList():News[] {
+      return this.newsList;
+    }
+
+ 
 
   }
   

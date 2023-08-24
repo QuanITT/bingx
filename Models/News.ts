@@ -2,8 +2,9 @@ import { BaseModel } from "../Base/baseModel";
 import { Channel } from "./Channel";
 
 class News implements BaseModel {
-  imgUrl: string;
+  public newsList: News[];
   title: string;
+  imgUrl: string;
   like: number;
   unlike: number;
   channel: Channel;
@@ -20,7 +21,10 @@ class News implements BaseModel {
     this.like = like;
     this.unlike = unlike;
     this.channel = channel;
+    this.newsList = [];
   }
+
+
 }
 
 export default News;

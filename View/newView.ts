@@ -4,7 +4,7 @@ import News from "../Models/News";
 
 
 class NewsView {
-  constructor(private component: Component) {
+  constructor(private component: Component<BaseModel>) {
     this.component = component;
   }
 

@@ -9,11 +9,11 @@ class ListNews {
     this.newsList = [];
   }
 
-  addNews(news: News): void {
+   addNews(news: News): void {
     this.newsList.push(news);
   }
 
-  getNewsList(): News[] {
+   getNewsList(): News[] {
     return this.newsList;
   }
 }
