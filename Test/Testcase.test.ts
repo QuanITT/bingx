@@ -3,6 +3,7 @@ import AppController from "../Controller/controller";
 import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
+import { BaseComponent } from "../View/baseComponent";
 
 describe("Controller", () => {
   it("should render news correctly", () => {
@@ -27,7 +28,6 @@ describe("ListView", () => {
     component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
     component.addNews(new News("News 2", "news2.jpg", 200, 20, channel));
 
-
     // Act
     const result = component.RenderListNews();
 
@@ -43,20 +43,30 @@ describe("Root to news", () => {
   it("Should root view app controller component", () => {
     const app = new AppController();
 
-  const channel: Channel = { name: "News Channel", icon: "icon1" };
-  app.component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
-  app.component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
-  app.component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
+    const channel: Channel = { name: "News Channel", icon: "icon1" };
+    app.component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
+    app.component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
+    app.component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
 
-  const result = app.component.RenderListNews();
+    const result = app.component.RenderListNews();
 
-  const news1 = app.component.getNewsList()[0];
-  const news2 = app.component.getNewsList()[1];
-  const news3 = app.component.getNewsList()[2];
+    const news1 = app.component.getNewsList()[0];
+    const news2 = app.component.getNewsList()[1];
+    const news3 = app.component.getNewsList()[2];
 
-
-  const expectedHtml = `<div><h1>${news1.title}</h1><img src="${news1.imgUrl}" alt="Image"><p>Like: ${news1.like}, Unlike: ${news1.unlike}</p><p>Channel: ${news1.channel.name}</p></div><div><h1>${news2.title}</h1><img src="${news2.imgUrl}" alt="Image"><p>Like: ${news2.like}, Unlike: ${news2.unlike}</p><p>Channel: ${news2.channel.name}</p></div><div><h1>${news3.title}</h1><img src="${news3.imgUrl}" alt="Image"><p>Like: ${news3.like}, Unlike: ${news3.unlike}</p><p>Channel: ${news3.channel.name}</p></div>`;
-  expect(result).toBe(expectedHtml);
+    const expectedHtml = `<div><h1>${news1.title}</h1><img src="${news1.imgUrl}" alt="Image"><p>Like: ${news1.like}, Unlike: ${news1.unlike}</p><p>Channel: ${news1.channel.name}</p></div><div><h1>${news2.title}</h1><img src="${news2.imgUrl}" alt="Image"><p>Like: ${news2.like}, Unlike: ${news2.unlike}</p><p>Channel: ${news2.channel.name}</p></div><div><h1>${news3.title}</h1><img src="${news3.imgUrl}" alt="Image"><p>Like: ${news3.like}, Unlike: ${news3.unlike}</p><p>Channel: ${news3.channel.name}</p></div>`;
+    expect(result).toBe(expectedHtml);
   });
-  
+});
+describe("@component", () => {
+  it("Should test Selector, Template, style  ", () => {
+    const controller = new BaseComponent();
+    controller.setselector = "app-root";
+    controller.settemplate = "<h3>wqehjqjjkqweh</h3>";
+    controller.setstyle = "h1{color:red}";
+    controller.data = "data";
+    const result = controller.RenderHTML();
+    const expectedHtml = controller.settemplate;
+    expect(result).toBe(expectedHtml);
+  });
 });

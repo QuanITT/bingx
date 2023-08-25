@@ -1,22 +1,40 @@
 export class BaseComponent {
-    private selector: string;
-    private template: string;
-    private style: string;
-    private data: any;
-    private children: BaseComponent[];
+  constructor() {
+    this._setselector = "";
+    this._settemplate = "";
+    this._setstyle = "";
+  }
+  private _data: any;
+  public get data(): any {
+    return this._data;
+  }
+  public set data(value: any) {
+    this._data = value;
+  }
 
-    constructor(selector: string, template: string, style: string, data: any, children: BaseComponent[]) {
-        this.selector = selector;
-        this.template = template;
-        this.style = style;
-        this.data = data;
-        this.children = children;
-    }
-    
+  private _setselector: string;
+  public get setselector(): string {
+    return this._setselector;
+  }
+  public set setselector(value: string) {
+    this._setselector = value;
+  }
+  private _settemplate: string;
+  public get settemplate(): string {
+    return this._settemplate;
+  }
+  public set settemplate(value: string) {
+    this._settemplate = value;
+  }
+  private _setstyle: string;
+  public get setstyle(): string {
+    return this._setstyle;
+  }
+  public set setstyle(value: string) {
+    this._setstyle = value;
+  }
 
-    
-
-
-
-    
+  RenderHTML(): string {
+    return this.settemplate;
+  }
 }
