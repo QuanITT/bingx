@@ -5,6 +5,7 @@ class AppController {
   public component: Component<News>; //component
   constructor() {
     this.component = new Component();
+    
   }
 
 }

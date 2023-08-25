@@ -1,7 +1,7 @@
 import { BaseModel } from '../Base/baseModel';
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
-  class Component< T extends BaseModel> {
+  class Component< BaseModel> {
     public newsList: News[];
     constructor(){
       this.newsList = [];
@@ -11,6 +11,11 @@ import News from "../Models/News";
       const container =`<div><h1>${model.title}</h1><img src="${model.imgUrl}" alt="Image"><p>Like: ${model.like}, Unlike: ${model.unlike}</p><p>Channel: ${model.channel.name}</p></div>`;
       return container;
     }
+    // class component 
+    // @Component Selector, template, ... 
+    // Buider -> extend component @component
+    // route -> list @component 
+     // builder all. 
     RenderListNews(): string {
       let newsHtml = '';
       this.newsList.forEach(news => {
