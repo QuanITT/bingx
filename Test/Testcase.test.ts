@@ -78,7 +78,7 @@ describe("@component", () => {
     component.selector = "app-root";
     component.style = "h1{color:red}";
     component.data = component.newsList[0];  
-    component.settemplate = `<p>hehehee</p><div>${component.data.title}${component.data.like}</div>`;
+    component.template = `<p>hehehee</p><div>${component.data.title}${component.data.like}</div>`;
     const result = component.RenderHTML();
     const expectedHtml = component.template;
     expect(result).toBe(expectedHtml);

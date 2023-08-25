@@ -1,17 +1,21 @@
-import { BaseModel } from "../Base/baseModel";
+import { Channel } from "../Models/Channel";
 import News from "../Models/News";
-import Component from "./component";
-class NewsView {
-  constructor(private component: Component<BaseModel>) {
-    this.component = component;
-  }
+import { BaseComponent } from "./baseComponent";
+ export class NewsComponent{
+  Main(){
+    const component = new BaseComponent();    
+    const channel: Channel = { name: "News Channel", icon: "icon1" };
+    component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
 
-  RenderToElement(news:News) {
-    const container = document.getElementById('News-Class');
-    if (container) {
-      container.innerHTML = this.component.RenderHTML(news);
-    }
+    const NewsView = new BaseComponent();
+    NewsView.setSelector("news-view");
+    NewsView.data = component.newsList[0];
+    NewsView.setTemplate(`<p>hehehee</p><div>${component.data.title}${component.data.like}</div>`);
+    NewsView.setStyles("color: red; font-size: 20px;");
+    NewsView.RenderHTML();
+    NewsView.build();
   }
-}
-
-export default NewsView;
+  constructor () {}
+ 
+};
+export default NewsComponent;
