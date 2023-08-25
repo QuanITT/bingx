@@ -1,8 +1,10 @@
-import { BaseModel } from "../Base/baseModel";
+import { Model } from "../Base/Model";
 import News from "../Models/News";
 
 export class BaseComponent {
-  newsList: News[];
+//   private model: Model<News>;
+//  new component builder : = > .setselector => .settemplate => .setstyle => .setdata => .buid 
+  public newsList: News[];
   addNews(news: News) {
     this.newsList.push(news);
   }
