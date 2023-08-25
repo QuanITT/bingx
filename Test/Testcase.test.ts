@@ -64,9 +64,23 @@ describe("@component", () => {
     controller.setselector = "app-root";
     controller.settemplate = "<h3>wqehjqjjkqweh</h3>";
     controller.setstyle = "h1{color:red}";
-    controller.data = "data";
     const result = controller.RenderHTML();
     const expectedHtml = controller.settemplate;
+    expect(result).toBe(expectedHtml);
+  });
+});
+describe("@component", () => {
+  it("Should Render Data for template  ", () => {
+    const component = new BaseComponent();    
+    const channel: Channel = { name: "News Channel", icon: "icon1" };
+    component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
+
+    component.setselector = "app-root";
+    component.setstyle = "h1{color:red}";
+    component.data = component.newsList[0];  
+    component.settemplate = `<h3>${component.data.title}${component.data.like}</h3>`;
+    const result = component.RenderHTML();
+    const expectedHtml = component.settemplate;
     expect(result).toBe(expectedHtml);
   });
 });

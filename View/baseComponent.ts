@@ -1,15 +1,23 @@
+import { BaseModel } from "../Base/baseModel";
+import News from "../Models/News";
+
 export class BaseComponent {
+  newsList: News[];
+  addNews(news: News) {
+    this.newsList.push(news);
+  }
   constructor() {
     this._setselector = "";
     this._settemplate = "";
     this._setstyle = "";
+    this.newsList = [];
   }
-  private _data: any;
-  public get data(): any {
+  public _data: any;
+  public get data(): News {
     return this._data;
   }
-  public set data(value: any) {
-    this._data = value;
+  public set data(model: News) {
+    this._data = model;
   }
 
   private _setselector: string;

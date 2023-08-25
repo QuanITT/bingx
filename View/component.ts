@@ -7,8 +7,9 @@ import { BaseComponent } from './baseComponent';
     private component = new BaseComponent();
     constructor(){
       this.newsList = [];
+
     }
-    
+
     RenderHTML(model: News): string {
       const container =`<div><h1>${model.title}</h1><img src="${model.imgUrl}" alt="Image"><p>Like: ${model.like}, Unlike: ${model.unlike}</p><p>Channel: ${model.channel.name}</p></div>`;
       return container;
