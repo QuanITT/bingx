@@ -3,6 +3,7 @@ import News from "../Models/News";
 
 export class BaseComponent {
   newsList: News[];
+
   addNews(news: News) {
     this.newsList.push(news);
   }
@@ -13,6 +14,7 @@ export class BaseComponent {
     this.newsList = [];
   }
   public _data: any;
+
   public get data(): News {
     return this._data;
   }
@@ -21,28 +23,32 @@ export class BaseComponent {
   }
 
   private _setselector: string;
-  public get setselector(): string {
+
+  public get selector(): string {
     return this._setselector;
   }
-  public set setselector(value: string) {
+
+  public set selector(value: string) {
     this._setselector = value;
   }
   private _settemplate: string;
-  public get settemplate(): string {
+
+  public get template(): string {
     return this._settemplate;
   }
-  public set settemplate(value: string) {
+  public set template(value: string) {
     this._settemplate = value;
   }
   private _setstyle: string;
-  public get setstyle(): string {
+
+  public get style(): string {
     return this._setstyle;
   }
-  public set setstyle(value: string) {
+  public set style(value: string) {
     this._setstyle = value;
   }
 
   RenderHTML(): string {
-    return this.settemplate;
+    return this.template;
   }
 }

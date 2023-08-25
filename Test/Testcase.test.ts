@@ -61,11 +61,11 @@ describe("Root to news", () => {
 describe("@component", () => {
   it("Should test Selector, Template, style  ", () => {
     const controller = new BaseComponent();
-    controller.setselector = "app-root";
-    controller.settemplate = "<h3>wqehjqjjkqweh</h3>";
-    controller.setstyle = "h1{color:red}";
+    controller.selector = "app-root";
+    controller.template = "<h3>wqehjqjjkqweh</h3>";
+    controller.style = "h1{color:red}";
     const result = controller.RenderHTML();
-    const expectedHtml = controller.settemplate;
+    const expectedHtml = controller.template;
     expect(result).toBe(expectedHtml);
   });
 });
@@ -75,12 +75,12 @@ describe("@component", () => {
     const channel: Channel = { name: "News Channel", icon: "icon1" };
     component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
 
-    component.setselector = "app-root";
-    component.setstyle = "h1{color:red}";
+    component.selector = "app-root";
+    component.style = "h1{color:red}";
     component.data = component.newsList[0];  
-    component.settemplate = `<h3>${component.data.title}${component.data.like}</h3>`;
+    component.template = `<h3>${component.data.title}${component.data.like}</h3>`;
     const result = component.RenderHTML();
-    const expectedHtml = component.settemplate;
+    const expectedHtml = component.template;
     expect(result).toBe(expectedHtml);
   });
 });
