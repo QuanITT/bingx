@@ -7,7 +7,6 @@ import { BaseComponent } from './baseComponent';
     private component = new BaseComponent();
     constructor(){
       this.newsList = [];
-
     }
 
     RenderHTML(model: News): string {
@@ -36,8 +35,6 @@ import { BaseComponent } from './baseComponent';
     getNewsList():News[] {
       return this.newsList;
     }
-
- 
 
   }
   
