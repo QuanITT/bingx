@@ -4,6 +4,7 @@ import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
 import { BaseComponent } from "../View/baseComponent";
+import { Builder } from "../View/builderParten";
 
 describe("Controller", () => {
   it("should render news correctly", () => {
@@ -82,5 +83,22 @@ describe("@component", () => {
     const result = component.RenderHTML();
     const expectedHtml = component.template;
     expect(result).toBe(expectedHtml);
+  });
+});
+describe("@component", () => {
+  it("Should Render Data for template < Builder > and Data for News  ", () => {
+    const component = new BaseComponent();    
+
+    const channel: Channel = { name: "News Channel", icon: "icon1" };
+    component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
+    component.data = component.newsList[0];  
+    const build = component
+                          .buildSelector("news-view")
+                          .buildStyle("app-root")
+                          .buildModel(News)
+                          .buildTemplate(`<p>hehehee</p><div>${component.data.title}${component.data.like}</div>`)
+                          .appBuild();
+
+    expect(build).toBe("<p>hehehee</p><div>News 1100</div>");
   });
 });

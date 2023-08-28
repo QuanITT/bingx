@@ -1,10 +1,7 @@
-import { Model } from "../Base/Model";
 import News from "../Models/News";
 
 export class BaseComponent {
-  build() {
-    return this.RenderHTML();
-  }
+
   //   private model: Model<News>;
   //  new component builder : = > .setselector => .settemplate => .setstyle => .setdata => .buid
   public newsList: News[];
@@ -18,11 +15,11 @@ export class BaseComponent {
     this.newsList = [];
   }
   public _data: any;
-
-  public get data(): News {
-    return this._data;
+  
+  public get data() {
+    return this._data ;
   }
-  public set data(model: News) {
+  public set data(model: any) {
     this._data = model;
   }
 
@@ -56,13 +53,43 @@ export class BaseComponent {
     return this.template;
   }
   setStyles(style: string) {
-    return this.style;
+    this.style = style;
   }
   setSelector(selector: string) {
-    return this.selector;
+    this.selector = selector;
   }
-  setTemplate(template:string) {
-    return this.template; 
+  setTemplate(template: string) {
+    return this.template = template;
+  }
+  setData(data: any) {
+    return data;
+  }
+  //builder pattern
+  buildSelector(value: string) {
+    this.setSelector(value);
+    return this;
+  }
+
+  buildTemplate(value: string) {
+    this.setTemplate(value);
+    return this;
+  }
+
+  buildModel(value: any) {
+    this.setData(value);
+    return this;
+  }
+
+  buildStyle(value: string) {
+    this.setStyles(value);
+    return this;
+  }
+  appBuild() {
+    this.RenderHTML();
+    return this.template;
+  }
+    build() {
+    return this.RenderHTML();
   }
 }
 export default BaseComponent;
