@@ -24,7 +24,9 @@ class News implements BaseModel {
     this.newsList = [];
   }
 
-
+  addNews(item: News) {
+    this.newsList.push(item);
+  }
 }
 
 export default News;

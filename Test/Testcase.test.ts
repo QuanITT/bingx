@@ -78,7 +78,7 @@ describe("@component", () => {
 
     component.selector = "app-root";
     component.style = "h1{color:red}";
-    component.data = component.newsList[0];  
+    component.data = component._newsList[0];  
     component.template = `<p>hehehee</p><div>${component.data.title}${component.data.like}</div>`;
     const result = component.RenderHTML();
     const expectedHtml = component.template;
@@ -87,11 +87,10 @@ describe("@component", () => {
 });
 describe("@component", () => {
   it("Should Render Data for template < Builder > and Data for News  ", () => {
-    const component = new BaseComponent();    
-
+    const component = new BaseComponent<News>;    
     const channel: Channel = { name: "News Channel", icon: "icon1" };
     component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
-    component.data = component.newsList[0];  
+    component.data = component._newsList[0];  
     const build = component
                           .buildSelector("news-view")
                           .buildStyle("app-root")

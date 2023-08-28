@@ -1,18 +1,14 @@
+import { Model } from "../Base/Model";
 import News from "../Models/News";
 
-export class BaseComponent {
-
-  //   private model: Model<News>;
-  //  new component builder : = > .setselector => .settemplate => .setstyle => .setdata => .buid
-  public newsList: News[];
-  addNews(news: News) {
-    this.newsList.push(news);
-  }
+export class BaseComponent<Model> {
+  _newsList: News[];
   constructor() {
     this._setselector = "";
     this._settemplate = "";
     this._setstyle = "";
-    this.newsList = [];
+    this._newsList = [];
+
   }
   public _data: any;
   
@@ -90,6 +86,10 @@ export class BaseComponent {
   }
     build() {
     return this.RenderHTML();
+  }
+
+  addNews(item: News) {
+    this._newsList.push(item);
   }
 }
 export default BaseComponent;

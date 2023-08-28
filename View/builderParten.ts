@@ -1,7 +1,8 @@
+import News from "../Models/News";
 import BaseComponent from "./baseComponent";
 
 export class Builder { 
-    private component: BaseComponent;;
+    private component: BaseComponent<News>;
 
     constructor() { 
         this.component = new BaseComponent();
