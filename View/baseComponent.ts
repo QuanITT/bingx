@@ -84,7 +84,7 @@ export class BaseComponent<Model> {
     this.RenderHTML();
     return this.template;
   }
-    build() {
+  build() {
     return this.RenderHTML();
   }
 

@@ -4,7 +4,7 @@ import { Channel } from "../Models/Channel";
 import ListNews from "../Models/ListNews";
 import News from "../Models/News";
 import { BaseComponent } from "../View/baseComponent";
-import { Builder } from "../View/builderParten";
+import { ComponentDecorator } from "../Base/decorator";
 
 describe("Controller", () => {
   it("should render news correctly", () => {
@@ -99,5 +99,28 @@ describe("@component", () => {
                           .appBuild();
 
     expect(build).toBe("<p>hehehee</p><div>News 1100</div>");
+  });
+});
+describe("Test Decorator", () => {
+  it("should decorator works properly", () => {
+    @ComponentDecorator({
+      selector: "news",
+      template: "<div>{{title}}</div>",
+      style: "h1{color:red}",
+    })
+    class NewsComponent {
+      title = "Hello";
+      build() {
+        let view = (this as any).template;
+        for (let key in this) {
+          view = view.replace(`{{${key}}}`, this[key]);  
+        }
+        return view;
+      }
+    }
+
+    const news = new NewsComponent().build();
+
+    expect(news).toBe("<div>Hello</div>");
   });
 });
