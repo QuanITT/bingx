@@ -1,7 +1,6 @@
-import { BaseModel } from "../Base/baseModel";
 import { Channel } from "./Channel";
 
-class News implements BaseModel {
+class News   {
   public newsList: News[];
   title: string;
   imgUrl: string;
