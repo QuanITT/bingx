@@ -1,25 +1,22 @@
-import { Model } from "../Base/Model";
-import News from "../Models/News";
+export class BaseComponent<T extends Record<string, any>> {
+  private _data: T;
+  private _setselector: string;
+  private _settemplate: string;
+  private _setstyle: string;
 
-export class BaseComponent<Model> {
-  _newsList: News[];
   constructor() {
     this._setselector = "";
     this._settemplate = "";
     this._setstyle = "";
-    this._newsList = [];
-
+    this._data = {} as T;
   }
-  public _data: any;
-  
+
   public get data() {
-    return this._data ;
+    return this._data;
   }
   public set data(model: any) {
     this._data = model;
   }
-
-  private _setselector: string;
 
   public get selector(): string {
     return this._setselector;
@@ -28,7 +25,6 @@ export class BaseComponent<Model> {
   public set selector(value: string) {
     this._setselector = value;
   }
-  private _settemplate: string;
 
   public get template(): string {
     return this._settemplate;
@@ -36,7 +32,6 @@ export class BaseComponent<Model> {
   public set template(value: string) {
     this._settemplate = value;
   }
-  private _setstyle: string;
 
   public get style(): string {
     return this._setstyle;
@@ -55,7 +50,7 @@ export class BaseComponent<Model> {
     this.selector = selector;
   }
   setTemplate(template: string) {
-    return this.template = template;
+    return (this.template = template);
   }
   setData(data: any) {
     return data;
@@ -86,10 +81,6 @@ export class BaseComponent<Model> {
   }
   build() {
     return this.RenderHTML();
-  }
-
-  addNews(item: News) {
-    this._newsList.push(item);
   }
 }
 export default BaseComponent;

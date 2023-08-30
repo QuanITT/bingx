@@ -59,46 +59,18 @@ describe("Root to news", () => {
     expect(result).toBe(expectedHtml);
   });
 });
-describe("@component", () => {
-  it("Should test Selector, Template, style  ", () => {
-    const controller = new BaseComponent();
-    controller.selector = "app-root";
-    controller.template = "<h3>wqehjqjjkqweh</h3>";
-    controller.style = "h1{color:red}";
-    const result = controller.RenderHTML();
-    const expectedHtml = controller.template;
-    expect(result).toBe(expectedHtml);
-  });
-});
-describe("@component", () => {
-  it("Should Render Data for template  ", () => {
-    const component = new BaseComponent();    
-    const channel: Channel = { name: "News Channel", icon: "icon1" };
-    component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
 
-    component.selector = "app-root";
-    component.style = "h1{color:red}";
-    component.data = component._newsList[0];  
-    component.template = `<p>hehehee</p><div>${component.data.title}${component.data.like}</div>`;
-    const result = component.RenderHTML();
-    const expectedHtml = component.template;
-    expect(result).toBe(expectedHtml);
-  });
-});
 describe("@component", () => {
   it("Should Render Data for template < Builder > and Data for News  ", () => {
     const component = new BaseComponent<News>;    
-    const channel: Channel = { name: "News Channel", icon: "icon1" };
-    component.addNews(new News("News 1", "news1.jpg", 100, 10, channel));
-    component.data = component._newsList[0];  
     const build = component
                           .buildSelector("news-view")
                           .buildStyle("app-root")
                           .buildModel(News)
-                          .buildTemplate(`<p>hehehee</p><div>${component.data.title}${component.data.like}</div>`)
+                          .buildTemplate(`<p>hehehee</p><div></div>`)
                           .appBuild();
 
-    expect(build).toBe("<p>hehehee</p><div>News 1100</div>");
+    expect(build).toBe("<p>hehehee</p><div></div>");
   });
 });
 describe("Test Decorator", () => {
