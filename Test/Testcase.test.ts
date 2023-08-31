@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 import News from "../Models/News";
 import { BaseComponent } from "../View/baseComponent";
 import { ComponentDecorator } from "../Base/decorator";
@@ -7,8 +7,7 @@ import { NewsComponent } from "../View/newView";
 import { AppComponent } from "../View/app";
 import { ChannelComponent } from "../View/channel";
 import { NewsService } from "../Serivce/newService";
-import { reflect } from '../node_modules/tst-reflect/dist/reflect';
-import { Component } from '../Base/component';
+import { Component } from "../Base/component";
 
 //create test root element
 describe("@component", () => {
@@ -53,28 +52,21 @@ describe("Test Module Controller", () => {
     const appModule = new AppModule();
     let componentList: Component[] = [];
     appModule.declareComponent(NewsComponent);
-    componentList = appModule.declareComponent(ChannelComponent);
-    componentList = appModule.declareComponent(NewsComponent);
+    appModule.declareComponent(ChannelComponent);
 
+    componentList = appModule.declareComponent(ChannelComponent, NewsComponent);
 
-    componentList.forEach(element => {
+    componentList.forEach((element) => {
       //  let abc =   Reflect.getPrototypeOf(element);
       //   expect(abc).toBe(BaseComponent);
+      expect(Reflect.getPrototypeOf(element)).toBeDefined();
 
-      expect(element.prototype.constructor).toBeDefined();
+      const service = new element(new NewsService());
+      expect(service.newsService).toBeDefined();
 
-      const newsComponent = new element(new NewsService());
-
-      expect(newsComponent.newsService).toBeDefined();
-
-      expect(newsComponent.newsService instanceof NewsService).toBe(true);
-      
-      const news = newsComponent.newsService.getNew();
+      const news = service.newsService.getNew();
 
       expect(news).toBe("news");
-
-
-        
     });
 
     expect(appModule.declaretion["news"]).toBeTruthy();

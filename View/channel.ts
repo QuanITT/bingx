@@ -1,4 +1,5 @@
 import { ComponentDecorator } from "../Base/decorator";
+import { NewsService } from "../Serivce/newService";
 @ComponentDecorator({
   selector: "channel",
   template: "<div>{{channel}}</div>",
@@ -6,5 +7,5 @@ import { ComponentDecorator } from "../Base/decorator";
 })
 export class ChannelComponent {
   channel = "ABC";
-  constructor() {}
+  constructor(public newsService:  NewsService) {}
 }
