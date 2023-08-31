@@ -7,8 +7,20 @@
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
       "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "plugins": [
+        {
+            "transform": "tst-reflect-transformer"
+        }
+    ]
 
-    }
+
+    },
+    "ts-node": {
+      // This can be omitted when using ts-patch
+      "compiler": "ttypescript"
+  },
+
   }
   
   

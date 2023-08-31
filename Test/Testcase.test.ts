@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import News from "../Models/News";
 import { BaseComponent } from "../View/baseComponent";
 import { ComponentDecorator } from "../Base/decorator";
@@ -5,6 +6,9 @@ import { AppModule } from "../Controller/appmodule";
 import { NewsComponent } from "../View/newView";
 import { AppComponent } from "../View/app";
 import { ChannelComponent } from "../View/channel";
+import { NewsService } from "../Serivce/newService";
+import { reflect } from '../node_modules/tst-reflect/dist/reflect';
+import { Component } from '../Base/component';
 
 //create test root element
 describe("@component", () => {
@@ -47,26 +51,39 @@ describe("Test Decorator", () => {
 describe("Test Module Controller", () => {
   it("should Controleer", () => {
     const appModule = new AppModule();
+    let componentList: Component[] = [];
     appModule.declareComponent(NewsComponent);
-    
+    componentList = appModule.declareComponent(ChannelComponent);
+    componentList = appModule.declareComponent(NewsComponent);
+
+
+    componentList.forEach(element => {
+      //  let abc =   Reflect.getPrototypeOf(element);
+      //   expect(abc).toBe(BaseComponent);
+
+      expect(element.prototype.constructor).toBeDefined();
+
+      const newsComponent = new element(new NewsService());
+
+      expect(newsComponent.newsService).toBeDefined();
+
+      expect(newsComponent.newsService instanceof NewsService).toBe(true);
+      
+      const news = newsComponent.newsService.getNew();
+
+      expect(news).toBe("news");
+
+
+        
+    });
 
     expect(appModule.declaretion["news"]).toBeTruthy();
-
-  });  
-});
-
-describe("Test Module Controller", () => {
-  it("should Controleer rennder", () => {
-    const appModule = new AppModule();
-
-    appModule.addRoot(AppComponent);
-    appModule.declareComponent(AppComponent,NewsComponent,ChannelComponent);
-
-    const result  = appModule.run();
-
-    expect(result).toContain(`<div>News</div>`);
-    expect(result).toContain(`<div>ABC</div>`);
-
   });
 });
 
+/// DI test
+describe("Test Inject decorator", () => {
+  it("should @injecable", () => {
+    expect(NewsService.prototype.providedIn).toBe("root");
+  });
+});

@@ -1,3 +1,4 @@
+import { NewsService } from './../Serivce/newService';
 import { ComponentDecorator } from "../Base/decorator";
 @ComponentDecorator({
   selector: "news",
@@ -9,5 +10,8 @@ import { ComponentDecorator } from "../Base/decorator";
 })
 export class NewsComponent {
   title = "Hello";
-  constructor() {}
+  constructor(public newsService:  NewsService) {
+    
+  }
+  
 }
