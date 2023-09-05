@@ -5,11 +5,17 @@ export function ComponentDecorator(config: {
   selector: string;
   template: string;
   style: string;
+  provider?: any[];
 }) {
-  return function (target: Function) {
+  return function (target: Function    ) {
     target.prototype.selector = config.selector;
     target.prototype.template = config.template;
     target.prototype.style = config.style;
+    target.prototype.provider = config.provider;
+
+    
+
+
   };
 }
 
@@ -27,6 +33,21 @@ interface ComponentInjectable {
 
 export function InjectableMetadata(metadata: ComponentInjectable) {
   return (target: Component) => {
-    // Reflect.defineMetadata("componentMetadata", metadata, target);
+    Reflect.defineMetadata("componentMetadata", metadata, target);
   };
 }
+
+
+interface ComponentMetadata {
+    selector: string;
+    template: string;
+    style: string;
+
+  }
+  
+  export function ComponentMetadata(metadata: ComponentMetadata) {
+    return (target: Component) => {
+      Reflect.defineMetadata("componentMetadata", metadata, target);
+    };
+  }
+  

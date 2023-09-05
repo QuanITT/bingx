@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,10 @@
   "devDependencies": {
     "@testing-library/dom": "^9.3.1",
     "@types/jest": "^29.5.3",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "@typescript-eslint/parser": "^6.6.0",
+    "eslint": "^8.48.0",
+    "eslint-plugin-import": "^2.28.1",
     "jest": "^29.6.2",
     "ts-jest": "^29.1.1",
     "tst-reflect-transformer": "^1.0.0-alpha.11",

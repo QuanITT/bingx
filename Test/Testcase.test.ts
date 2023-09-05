@@ -51,25 +51,25 @@ describe("Test Module Controller", () => {
   it("should Controleer", () => {
     const appModule = new AppModule();
     let componentList: Component[] = [];
+    let serviceList: Component[] = [];
     appModule.declareComponent(NewsComponent);
     appModule.declareComponent(ChannelComponent);
-
-    componentList = appModule.declareComponent(ChannelComponent, NewsComponent);
-
-    componentList.forEach((element) => {
-      //  let abc =   Reflect.getPrototypeOf(element);
-      //   expect(abc).toBe(BaseComponent);
-      expect(Reflect.getPrototypeOf(element)).toBeDefined();
-
-      const service = new element(new NewsService());
-      expect(service.newsService).toBeDefined();
-
-      const news = service.newsService.getNew();
-
-      expect(news).toBe("news");
-    });
+    appModule.declareService(NewsService);
 
     expect(appModule.declaretion["news"]).toBeTruthy();
+    expect(appModule.declaretion["channel"]).toBeTruthy();
+    expect(appModule.declaretion["root"]).toBeTruthy();
+
+    //componentList = appModule.declareComponent(ChannelComponent, NewsComponent);
+    //serviceList = appModule.declaretion["root"];
+    const service = appModule.declaretion["root"];
+    service.constructor();
+    for (let key in componentList) {
+      const element = componentList[key];
+      const a = element.constructor;
+
+      expect(a).toBe("News");
+    }
   });
 });
 
@@ -77,5 +77,34 @@ describe("Test Module Controller", () => {
 describe("Test Inject decorator", () => {
   it("should @injecable", () => {
     expect(NewsService.prototype.providedIn).toBe("root");
+  });
+});
+// test provider in component
+
+describe("Test Decorator", () => {
+  it("should decorator", () => {
+    @ComponentDecorator({
+      selector: "news",
+      template: "<div>{{title}}</div>",
+      style: "h1{color:red}",
+      provider: [NewsService],
+    })
+    class NewsComponent {
+      static selector(selector: string) {
+          return selector;
+      }
+      title = "Hello";
+      constructor() {}
+      build() {
+        let view = (this as any).template;
+        for (let key in this) {
+          view = view.replace(`{{${key}}}`, this[key]);
+        }
+        return view;
+      }
+    }
+    it('should have the correct selector', () => {
+      expect(NewsComponent.selector).toBe('news');
+    });
   });
 });

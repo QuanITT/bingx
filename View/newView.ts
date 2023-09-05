@@ -10,8 +10,9 @@ import { ComponentDecorator } from "../Base/decorator";
 })
 export class NewsComponent {
   title = "Hello";
-  constructor() {
+  constructor(private a: NewsService) {
+    
+  }
     
   }
   
-}

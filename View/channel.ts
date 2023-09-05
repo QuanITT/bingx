@@ -8,4 +8,5 @@ import { NewsService } from "../Serivce/newService";
 export class ChannelComponent {
   channel = "ABC";
   constructor(public newsService:  NewsService) {}
+  
 }
