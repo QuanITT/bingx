@@ -1,7 +1,7 @@
 
-import { Injectable } from "../Base/decorator";
+import { InjectableMetadata } from "../Base/decorator";
 
-@Injectable({
+@InjectableMetadata({
     providedIn: 'root'
 })
 export class WeatherService {

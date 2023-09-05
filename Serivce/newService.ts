@@ -1,18 +1,13 @@
-import { Injectable } from "../Base/decorator";
+import { InjectableMetadata } from "../Base/decorator";
 
-@Injectable({
+@InjectableMetadata({
     providedIn: 'root'
 })
 export class NewsService {
-  getNew() {
-    return "news";
-  }
-  providedIn(providedIn: string) {
-    return function (target: Function) {
-        target.prototype.providedIn = providedIn;
-    };
-
-  }
+    getNews() {
+      return "news";
+    }
+ 
 
 
 }

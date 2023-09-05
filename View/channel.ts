@@ -1,6 +1,6 @@
-import { ComponentDecorator } from "../Base/decorator";
+import { ComponentMetadata } from "../Base/decorator";
 import { NewsService } from "../Serivce/newService";
-@ComponentDecorator({
+@ComponentMetadata({
   selector: "channel",
   template: "<div>{{channel}}</div>",
   style: "h1{color:red}",

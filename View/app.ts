@@ -1,6 +1,6 @@
-import { ComponentDecorator } from "../Base/decorator";
+import { ComponentMetadata } from "../Base/decorator";
 
-@ComponentDecorator({
+@ComponentMetadata({
   selector: "app-root",
   template: `
     <div>

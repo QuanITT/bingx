@@ -1,14 +1,15 @@
-export class BaseComponent<T extends Record<string, any>> {
-  private _data: T;
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+export class BaseComponent {
   private _setselector: string;
   private _settemplate: string;
   private _setstyle: string;
+  private _data: any;
 
   constructor() {
     this._setselector = "";
     this._settemplate = "";
     this._setstyle = "";
-    this._data = {} as T;
+    this._data = {};
   }
 
   public get data() {

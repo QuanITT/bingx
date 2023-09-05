@@ -1,1 +1,1 @@
-export const PARAMTYPES_METADATA = 'design:paramtypes';
+export const PARAMTYPES_METADATA = 'componentMetadata';
