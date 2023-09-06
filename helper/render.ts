@@ -9,10 +9,12 @@ export class Render {
     this.htmlParser = new HtmlParser();
   }
 
-  renderRoot(rootSelector: string, declaration: Declare): string {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  renderRoot(rootSelector: string, declaration: Declare ): string {
     document.body.innerHTML = `<${rootSelector}></${rootSelector}>`;
 
     this.traverse(document.body, declaration);
+    
 
     return document.body.innerHTML;
   }
@@ -64,16 +66,16 @@ export class Render {
   private interpolateText(instance: InstanceType<Component>): string {
     let view = instance.constructor.getMetadata().template;
 
-    for (const key in instance) {
-      if (typeof instance[key] === "object") {
-        for (const k in instance[key]) {
-          view = view.replace(`{{${key}.${k}}}`, instance[key][k]);
+    for (const prop  in instance) {
+      if (typeof instance[prop ] === "object") {
+        for (const k in instance[prop ]) {
+          view = view.replace(`{{${prop }.${k}}}`, instance[prop ][k]);
         }
       } else {
-        view = view.replace(`{{${key}}}`, instance[key]);
+        view = view.replace(`{{${prop }}}`, instance[prop ]);
       }
     }
 
     return view;
   }
-}
+}  

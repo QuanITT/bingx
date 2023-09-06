@@ -1,5 +1,5 @@
 import { Component } from "../Base/component";
-import { Declare } from "../Base/declare";
+import { Declare, Provider } from "../Base/declare";
 import { Service } from "../Base/service";
 import { ReflectHelper } from "../helper/reflectHelper";
 import { Render } from "../helper/render";
@@ -8,12 +8,15 @@ import { Render } from "../helper/render";
 export class AppModule {
 
   private declaration: Declare;
+  private provider: Provider;
+  private rootService!: Service;
   private rootComponent!: Component;
   private renderer: Render;
   private reflectHelper: ReflectHelper;
 
   constructor() {
     this.declaration = {};
+    this.provider = {};
     this.renderer = new Render();
     this.reflectHelper = new ReflectHelper();
   }
@@ -21,26 +24,32 @@ export class AppModule {
   getDeclaration(): Declare{
     return this.declaration
   }
+  getProvider(): Provider {
+    return this.provider
+  }
+  
 
   declareComponents(...components: Component[]): void {
-    for (const component of components) {
+    components.forEach((component) => { 
       const selector = this.reflectHelper.getMetadata(component).selector.toUpperCase();
       this.declaration[selector] = component;
-    }
+    });
   }
-  declareService(...services: Service[]) {
-    for (const service of services) {
-      const provider = this.reflectHelper.getMetadata(service).providedIn.toUpperCase();
-      this.declaration[provider] = service;
-    }
+  declareService(...services: Service[]):void {
+    services.forEach((service) => {
+      const provider = this.reflectHelper.getMetadataSerivce(service).providedIn.toUpperCase();
+      this.provider[provider] = service;
+     });
 }
 
   setRootComponent(component: Component): void {
     this.rootComponent = component;
   }
 
+
   run(): string {
     const rootSelector = this.reflectHelper.getMetadata(this.rootComponent).selector;
+    // const providerIn = this.reflectHelper.getMetadataSerivce(this.rootService).providedIn;
     return this.renderer.renderRoot(rootSelector, this.declaration);
   }
 }
