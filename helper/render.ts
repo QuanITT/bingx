@@ -12,7 +12,6 @@ export class Render {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   renderRoot(rootSelector: string, declaration: Declare ): string {
     document.body.innerHTML = `<${rootSelector}></${rootSelector}>`;
-
     this.traverse(document.body, declaration);
     
 

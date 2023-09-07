@@ -46,10 +46,16 @@ export class AppModule {
     this.rootComponent = component;
   }
 
+  CreateNewService(){
+    const rootService = this.reflectHelper.getMetadataSerivce(this.rootService).providedIn;
+    this.rootService = new rootService();
+  }
+
 
   run(): string {
+    this.CreateNewService();
     const rootSelector = this.reflectHelper.getMetadata(this.rootComponent).selector;
-    // const providerIn = this.reflectHelper.getMetadataSerivce(this.rootService).providedIn;
     return this.renderer.renderRoot(rootSelector, this.declaration);
+
   }
 }
