@@ -1,7 +1,7 @@
 import { Component } from "./component";
 import "reflect-metadata";
 import { PARAMTYPES_METADATA } from "./constants";
-/* eslint-disable  @typescript-eslint/no-explicit-any */
+import { Service } from "./service";
 interface ComponentInjectable {
   providedIn: string;
 }
@@ -16,7 +16,7 @@ export interface ComponentMetadata {
   selector: string;
   template: string;
   style: string;
-  provider?: any[];
+  provider?: Service[];
 }
 export function ComponentMetadata(metadata: ComponentMetadata) {
   return (target: Component) => {

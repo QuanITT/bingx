@@ -14,8 +14,8 @@ describe("Test declarations Component and service", () => {
   })
   class NewsComponent {
     constructor(private newsService: NewsService) {
-      //   const a = this.newsService.getNews();
-      //   this.title = a;
+        const a = this.newsService.getNews();
+        this.title = a;
     }
     title = "news";
   }
@@ -31,6 +31,41 @@ describe("Test declarations Component and service", () => {
 });
 
 //test renderAppComponent
+
+describe("Test render app component", () => {
+  let app: AppModule;
+  @ComponentMetadata({
+    selector: "app-root",
+    template: `
+        <div><p>Welcome to my app!</p></div>
+        <div>{{title}}</div>
+      `,
+    style: "h1{color:red}",
+  })
+  class AppComponent extends BaseComponent {
+    constructor(private myService: NewsService) {
+      super();
+      this.title = this.myService.getNews();
+  
+    }
+    title = "";
+  }
+
+
+  it("should app module render app component", () => {
+    app = new AppModule();
+    app.setRootComponent(AppComponent);
+    app.declareComponents(AppComponent);
+    app.declareServices(NewsService)
+
+    const result = app.run();
+
+    expect(result).toContain("<div><p>Welcome to my app!</p></div>");
+    expect(result).toContain("news");
+  });
+});
+
+
 
 describe("Test render app component", () => {
   let app: AppModule;
@@ -70,8 +105,3 @@ describe("Test render app component", () => {
   });
 });
 
-// test cho parent component , children component đều được inject service
-
-// test cho parent component có inject service , children component ko có inject service
-// các injectable service có inject providerIn "root " được new()
-// test data service

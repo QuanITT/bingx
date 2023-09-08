@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component } from "../Base/component";
 import { PARAMTYPES_METADATA } from "../Base/constants";
 import { Declare, Provider } from "../Base/declare";
@@ -41,10 +40,17 @@ export class AppModule {
   declareServices(...services: Service[]):void {
     this.services = [...this.services, ...services];
 
+    for(const i in this.declaration) {
+      const target = Reflect.getMetadata(PARAMTYPES_METADATA, this.declaration[i]);
+      let serviceList = target.provider || [];
+      serviceList  = [...serviceList, ...services];
+      Reflect.defineMetadata(PARAMTYPES_METADATA, {
+        ...target,
+        provider: serviceList,
+      }, this.declaration[i]);
+    }
+
   }
-  //create instance injectable service array for provider
-  //new instance for each service
-  createInstanceProvider() {}
   setRootComponent(component: Component): void {
     this.rootComponent = component;
   }
@@ -53,6 +59,6 @@ export class AppModule {
     const rootSelector = this.reflectHelper.getMetadata(
       this.rootComponent
     ).selector;
-    return this.renderer.renderRoot(rootSelector, this.declaration, this.services);
+    return this.renderer.renderRoot(rootSelector, this.declaration);
   }
 }
