@@ -1,5 +1,7 @@
 import { Component } from "../Base/component";
 import { Declare } from "../Base/declare";
+import { bootstrap } from "../Base/injecable";
+import { Service } from "../Base/service";
 import { HtmlParser } from "./htmlParser";
 
 export class Render {
@@ -10,27 +12,27 @@ export class Render {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  renderRoot(rootSelector: string, declaration: Declare ): string {
+  renderRoot(rootSelector: string, declaration: Declare, services: Service[] ): string {
     document.body.innerHTML = `<${rootSelector}></${rootSelector}>`;
-    this.traverse(document.body, declaration);
+    this.traverse(document.body, declaration, services);
     
 
     return document.body.innerHTML;
   }
 
-  private traverse(element: HTMLElement, declaration: Declare): void {
+  private traverse(element: HTMLElement, declaration: Declare, services: Service[]): void {
     for (const key in declaration) {
       const elements = element.querySelectorAll(key);
 
       elements.forEach((child: Element) => {
         const componentClass = declaration[child.tagName];
-        const instance = new componentClass();
+        const instance = bootstrap(componentClass);
         //parse data receive from parent component if any
         instance.data = JSON.parse(child.getAttribute("data") ?? "{}");
 
         const newChildElement = this.htmlParser.parseToHtmlElement(this.bindData(instance));
         this.replaceChild(child as HTMLElement, newChildElement);
-        this.traverse(newChildElement, declaration);
+        this.traverse(newChildElement, declaration, services);
       });
     }
   }

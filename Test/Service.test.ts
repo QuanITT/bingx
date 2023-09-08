@@ -23,11 +23,10 @@ describe("Test declarations Component and service", () => {
   it("should component be declared component and service", () => {
     app = new AppModule();
     app.declareComponents(NewsComponent);
-    app.declareService(NewsService);
-
+    app.declareServices(NewsService);
     expect(app.getDeclaration()["NEWS"]).toBeTruthy();
 
-    expect(app.getProvider()["root"]).toBeTruthy();
+    expect(app.services[0].name).toBe("NewsService");
   });
 });
 
@@ -62,9 +61,8 @@ describe("Test render app component", () => {
     app = new AppModule();
     app.setRootComponent(AppComponent);
     app.declareComponents(AppComponent);
-    app.declareService(NewsService);
+    app.declareServices(NewsService)
 
-    expect(app.getProvider()["root"]).toBeTruthy();
     const result = app.run();
 
     expect(result).toContain("<div><p>Welcome to my app!</p></div>");

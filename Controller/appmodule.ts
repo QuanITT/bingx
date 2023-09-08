@@ -11,9 +11,11 @@ export class AppModule {
   private provider: Provider;
   private rootComponent!: Component;
   private renderer: Render;
-  private reflectHelper: ReflectHelper;
+  private reflectHelper: ReflectHelper;  
+  services: Service[]
 
   constructor() {
+    this.services = [];
     this.declaration = {};
     this.provider = {};
     this.renderer = new Render();
@@ -35,19 +37,10 @@ export class AppModule {
       this.declaration[selector] = component;
     });
   }
-  declareService(...services: Service[]): void {
-    services.forEach((service) => {
-      const provider =
-        this.reflectHelper.getMetadataSerivce(service).providedIn;
-      if (!(provider in this.provider)) {
-        this.provider[provider] = [];
-      }
-      this.provider[provider].push(service);
 
-      
-    });
+  declareServices(...services: Service[]):void {
+    this.services = [...this.services, ...services];
 
-  
   }
   //create instance injectable service array for provider
   //new instance for each service
@@ -60,6 +53,6 @@ export class AppModule {
     const rootSelector = this.reflectHelper.getMetadata(
       this.rootComponent
     ).selector;
-    return this.renderer.renderRoot(rootSelector, this.declaration);
+    return this.renderer.renderRoot(rootSelector, this.declaration, this.services);
   }
 }
