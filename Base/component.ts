@@ -9,5 +9,6 @@ export interface Component extends Function {
 export class BaseComponent {
   static getMetadata(): ComponentMetadata | undefined {
     return Reflect.getMetadata(PARAMTYPES_METADATA, this);
-  }
+  }  
+
 }

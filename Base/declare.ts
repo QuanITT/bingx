@@ -6,5 +6,5 @@ export type Declare = {
 };
 
 export type Provider = {
-  [key: string]: Service;
+  [key: string]: Service[];
 }

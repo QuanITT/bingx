@@ -10,7 +10,7 @@ export class ReflectHelper {
     }
 
     getMetadataSerivce(component: Service) {
-        return Reflect.getMetadata(PARAMTYPES_METADATA, component) 
+        return Reflect.getMetadata(PARAMTYPES_METADATA, component);
     }
     
 }
