@@ -2,10 +2,6 @@ import "reflect-metadata";
 import { PARAMTYPES_METADATA } from "./constants";
 import { Service } from "./service";
 
-export interface Releasable {
-  release(): void;
-}
-
 export class Injector extends Map {
   public resolve(target: Service): InstanceType<Service> {
     const tokens =

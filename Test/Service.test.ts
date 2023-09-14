@@ -2,7 +2,7 @@ import { BaseComponent } from "../Base/component";
 import { ComponentMetadata } from "../Base/decorator";
 import { AppModule } from "../Controller/appmodule";
 import { NewsService } from "../Serivce/newService";
-import { bootstrap } from '../Base/injecable';
+import { bootstrap } from "../Base/injecable";
 
 describe("Test declarations Component and service", () => {
   let app: AppModule;
@@ -14,8 +14,8 @@ describe("Test declarations Component and service", () => {
   })
   class NewsComponent {
     constructor(private newsService: NewsService) {
-        const a = this.newsService.getNews();
-        this.title = a;
+      const a = this.newsService.getNews();
+      this.title = a;
     }
     title = "news";
   }
@@ -46,17 +46,15 @@ describe("Test render app component", () => {
     constructor(private myService: NewsService) {
       super();
       this.title = this.myService.getNews();
-  
     }
     title = "";
   }
-
 
   it("should app module render app component", () => {
     app = new AppModule();
     app.setRootComponent(AppComponent);
     app.declareComponents(AppComponent);
-    app.declareServices(NewsService)
+    app.declareServices(NewsService);
 
     const result = app.run();
 
@@ -64,8 +62,6 @@ describe("Test render app component", () => {
     expect(result).toContain("news");
   });
 });
-
-
 
 describe("Test render app component", () => {
   let app: AppModule;
@@ -82,21 +78,19 @@ describe("Test render app component", () => {
     constructor(private myService: NewsService) {
       super();
       this.title = this.myService.getNews();
-  
     }
     title = "";
   }
   it("should injectable service ", () => {
     const appcomponent = bootstrap(AppComponent);
     expect(appcomponent.title).toBe("news");
-
   });
 
   it("should app module render app component", () => {
     app = new AppModule();
     app.setRootComponent(AppComponent);
     app.declareComponents(AppComponent);
-    app.declareServices(NewsService)
+    app.declareServices(NewsService);
 
     const result = app.run();
 
@@ -104,4 +98,3 @@ describe("Test render app component", () => {
     expect(result).toContain("news");
   });
 });
-

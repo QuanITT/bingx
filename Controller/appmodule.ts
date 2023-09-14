@@ -10,8 +10,8 @@ export class AppModule {
   private provider: Provider;
   private rootComponent!: Component;
   private renderer: Render;
-  private reflectHelper: ReflectHelper;  
-  services: Service[]
+  private reflectHelper: ReflectHelper;
+  services: Service[];
 
   constructor() {
     this.services = [];
@@ -37,19 +37,25 @@ export class AppModule {
     });
   }
 
-  declareServices(...services: Service[]):void {
-    this.services = [...this.services, ...services];
+  declareServices(...services: Service[]): void {
+    this.services = [...new Set([...this.services, ...services])];
 
-    for(const i in this.declaration) {
-      const target = Reflect.getMetadata(PARAMTYPES_METADATA, this.declaration[i]);
+    for (const i in this.declaration) {
+      const target = Reflect.getMetadata(
+        PARAMTYPES_METADATA,
+        this.declaration[i]
+      );
       let serviceList = target.provider || [];
-      serviceList  = [...serviceList, ...services];
-      Reflect.defineMetadata(PARAMTYPES_METADATA, {
-        ...target,
-        provider: serviceList,
-      }, this.declaration[i]);
+      serviceList = [...serviceList, ...services];
+      Reflect.defineMetadata(
+        PARAMTYPES_METADATA,
+        {
+          ...target,
+          provider: serviceList,
+        },
+        this.declaration[i]
+      );
     }
-
   }
   setRootComponent(component: Component): void {
     this.rootComponent = component;
